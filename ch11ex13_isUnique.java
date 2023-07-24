@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class ch11ex13_isUnique {
@@ -22,21 +23,20 @@ public class ch11ex13_isUnique {
     }
 
     public static boolean isUnique(Map<String, String> map) {
-        Map<String, Integer> valueOccurrences = new HashMap<>();
-
-        for (String value : map.values()) {
-            valueOccurrences.put(value, valueOccurrences.getOrDefault(value, 0) + 1);
+        if (map == null || map.isEmpty()) {
+            return true;
         }
 
-        for (int occurrence : valueOccurrences.values()) {
-            if (occurrence > 1) {
+        HashSet<String> set = new HashSet<String>();
+
+        for (String value: map.values()) {
+            boolean added = set.add(value);
+            if (! added) {
                 return false;
             }
         }
 
         return true;
     }
-
-
 
 }
